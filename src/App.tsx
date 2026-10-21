@@ -64,7 +64,11 @@ function TypingLine({
 
 function App() {
   const [command, setCommand] = useState('')
-  const [history, setHistory] = useState<{ command: string; output: string }[]>([])
+  const [history, setHistory] = useState<
+    { command: string; output: string }[]
+  >([])
+  const [currentView, setCurrentView] = useState<'home' | 'skills'>('home')
+
 
   const submitCommand = () => {
     const submittedCommand = command.trim()
@@ -83,9 +87,17 @@ function App() {
       case 'about':
         output = 'Mathematics and Computer Science student exploring software development and cybersecurity.'
         break
+      
       case 'skills':
-        output = 'Currently learning: Linux, networking, Python, Nmap, web security, and penetration testing.'
-        break
+      setCurrentView('skills')
+      output = 'Opening skills interface...'
+      break
+
+      case 'back':
+      setCurrentView('home')
+      output = 'Returning to homepage...'
+      break
+
       case 'projects':
         output = 'Featured project: AI-powered network intrusion detection system. More projects coming soon.'
         break
@@ -115,64 +127,128 @@ function App() {
 
   return (
     <main className="site-shell">
-      <nav className="navbar">
-        <a className="brand" href="#home">
-          <span className="brand-mark">[G]</span>
-          <span>GEOFFREY<span className="accent">.DEV</span></span>
-        </a>
+      {currentView === 'home' && (
+        <nav className="navbar">
+          <a className="brand" href="#home">
+            <span className="brand-mark">[G]</span>
+            <span>GEOFFREY<span className="accent">.DEV</span></span>
+          </a>
 
-        <div className="nav-links">
-          <a href="#about">About</a>
-          <a href="#projects">Projects</a>
-          <a href="#contact">Contact</a>
-        </div>
+          <div className="nav-links">
+            <a href="#about">About</a>
+            <a href="#projects">Projects</a>
+            <a href="#contact">Contact</a>
+          </div>
 
-        <a className="availability" href="#contact">
-          <span className="status-dot" />
-          AVAILABLE FOR WORK
-        </a>
-      </nav>
+          <a className="availability" href="#contact">
+            <span className="status-dot" />
+            AVAILABLE FOR WORK
+          </a>
+        </nav>
+      )}
 
       <section className="hero-section" id="home">
-        <motion.div
-          className="hero-copy"
-          initial={{ opacity: 0, y: 100 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.7 }}
-        >
-          <p className="eyebrow">
-            <span className="accent">//</span> DEVELOPER & ASPIRING SECURITY PROFESSIONAL
-          </p>
+        {currentView === 'home' && (
+          <motion.div
+            className="hero-copy"
+            initial={{ opacity: 0, y: 100 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.7 }}
+          >
+            <p className="eyebrow">
+              <span className="accent">//</span> DEVELOPER & ASPIRING SECURITY PROFESSIONAL
+            </p>
 
-          <h1>
-            I BUILD
-            <br />
-            <span className="outlined-text">DIGITAL</span>
-            <br />
-            <span className="accent">EXPERIENCES.</span>
-          </h1>
+            <h1>
+              I BUILD
+              <br />
+              <span className="outlined-text">DIGITAL</span>
+              <br />
+              <span className="accent">EXPERIENCES.</span>
+            </h1>
 
-          <p className="hero-description">
-            Mathematics and Computer Science student exploring the intersection
-            of software development and cybersecurity. Building useful things
-            while learning how to secure them.
-          </p>
+            <p className="hero-description">
+              Mathematics and Computer Science student exploring the intersection
+              of software development and cybersecurity. Building useful things
+              while learning how to secure them.
+            </p>
 
-          <div className="hero-actions">
-            <a className="button button-primary" href="#projects">
-              EXPLORE MY WORK <span aria-hidden="true">↗</span>
-            </a>
-            <a className="button button-secondary" href="#contact">
-              CONTACT ME
-            </a>
-          </div>
+            <div className="hero-actions">
+              <a className="button button-primary" href="#projects">
+                EXPLORE MY WORK <span aria-hidden="true">↗</span>
+              </a>
+              <a className="button button-secondary" href="#contact">
+                CONTACT ME
+              </a>
+            </div>
 
-          <div className="hero-meta">
-            <span><span className="accent">01.</span> BUILD</span>
-            <span><span className="accent">02.</span> TEST</span>
-            <span><span className="accent">03.</span> SECURE</span>
-          </div>
-        </motion.div>
+            <div className="hero-meta">
+              <span><span className="accent">01.</span> BUILD</span>
+              <span><span className="accent">02.</span> TEST</span>
+              <span><span className="accent">03.</span> SECURE</span>
+            </div>
+          </motion.div>
+        )}
+
+        {currentView === 'skills' && (
+          <motion.div
+            className="skills-view"
+            initial={{ opacity: 0, y: 20 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.4 }}
+          >
+            <p className="eyebrow">
+              <span className="accent">//</span> 02 / CAPABILITIES
+            </p>
+
+            <h1>
+              TECHNICAL
+              <br />
+              <span className="accent">ARSENAL.</span>
+            </h1>
+
+            <p className="skills-view-description">
+              Practical skills built through hands-on projects,
+              Linux practice, networking, and authorized security labs.
+            </p>
+
+            <div className="skills-panels">
+              <div className="skill-panel">
+                <h3>01 — SECURITY TOOLS</h3>
+                <div className="skill-icons">
+                  <div className="skill-tile">Nmap</div>
+                  <div className="skill-tile">Wireshark</div>
+                  <div className="skill-tile">Metasploit</div>
+                  <div className="skill-tile">Burp Suite</div>
+                </div>
+              </div>
+
+              <div className="skill-panel">
+                <h3>02 — PROGRAMMING</h3>
+                <div className="skill-icons">
+                  <div className="skill-tile">Python</div>
+                  <div className="skill-tile">JavaScript</div>
+                  <div className="skill-tile">C/C++</div>
+                </div>
+              </div>
+
+              <div className="skill-panel">
+                <h3>03 — SYSTEMS & WEB</h3>
+                <div className="skill-icons">
+                  <div className="skill-tile">Linux</div>
+                  <div className="skill-tile">TCP/IP</div>
+                  <div className="skill-tile">React</div>
+                  <div className="skill-tile">Django</div>
+                  <div className="skill-tile">HTML / CSS</div>
+                </div>
+              </div>
+            </div>
+
+            <p className="skills-view-hint">
+              <span className="accent">$</span> type <strong>back</strong> in the terminal to return home
+            </p>
+          </motion.div>
+        )}
 
         <motion.aside
           className="terminal"
