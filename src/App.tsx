@@ -74,17 +74,36 @@ function App() {
     let output: string
 
     switch (submittedCommand.toLowerCase()) {
+      case 'help':
+        output = 'Commands: help, whoami, about, skills, projects, mission, ls, date, clear'
+        break
       case 'whoami':
-        output = 'developer_in_training'
+        output = 'Geoffrey — developer in training and aspiring security professional.'
+        break
+      case 'about':
+        output = 'Mathematics and Computer Science student exploring software development and cybersecurity.'
+        break
+      case 'skills':
+        output = 'Currently learning: Linux, networking, Python, Nmap, web security, and penetration testing.'
+        break
+      case 'projects':
+        output = 'Featured project: AI-powered network intrusion detection system. More projects coming soon.'
         break
       case 'mission':
-        output = 'build skills. create value. secure systems.'
+        output = 'Build skills. Create value. Secure systems.'
         break
-      case 'help':
-        output = 'Available commands: whoami, mission, help'
+      case 'ls':
+        output = 'about.txt  skills.txt  projects/  mission.txt'
         break
+      case 'date':
+        output = new Date().toLocaleDateString()
+        break
+      case 'clear':
+        setHistory([])
+        setCommand('')
+        return
       default:
-        output = `Command not found: ${submittedCommand}`
+        output = `Command not found: ${submittedCommand}. Type "help" for commands.`
     }
 
     setHistory((previousHistory) => [
@@ -117,7 +136,7 @@ function App() {
       <section className="hero-section" id="home">
         <motion.div
           className="hero-copy"
-          initial={{ opacity: 0, y: 24 }}
+          initial={{ opacity: 0, y: 100 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.7 }}
         >
