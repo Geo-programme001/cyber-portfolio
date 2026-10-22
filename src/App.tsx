@@ -2,6 +2,8 @@
 import { motion } from 'motion/react'
 import './App.css'
 import { useEffect, useState } from 'react'
+import emailjs from '@emailjs/browser'
+import type { FormEvent } from 'react'
 
 const terminalLines = [
   '> initializing cyber_lab...',
@@ -68,6 +70,8 @@ function App() {
     { command: string; output: string }[]
   >([])
   const [currentView, setCurrentView] = useState<'home' | 'skills'>('home')
+  const [isSending, setIsSending] = useState(false)
+  const [contactStatus, setContactStatus] = useState('')
 
 
   const submitCommand = () => {
@@ -125,9 +129,38 @@ function App() {
     setCommand('')
   }
 
+  const sendContactMessage = async (
+    event: FormEvent<HTMLFormElement>
+  ) => {
+    event.preventDefault()
+    setIsSending(true)
+    setContactStatus('')
+
+    const form = event.currentTarget
+
+    try {
+      await emailjs.sendForm(
+        'service_cbvw1pa',
+        'template_xke26ee',
+        form,
+        {
+          publicKey: 'bQAo3nvbEZuqx5yad',
+        }
+      )
+
+      setContactStatus('Message sent successfully! I will get back to you soon.')
+      form.reset()
+    } catch (error) {
+      console.error('EmailJS error:', error)
+      setContactStatus('Message could not be sent. Please try again or email me directly.')
+    } finally {
+      setIsSending(false)
+    }
+  }
+
   return (
     <main className="site-shell">
-      {currentView === 'home' && (
+     
         <nav className="navbar">
           <a className="brand" href="#home">
             <span className="brand-mark">[G]</span>
@@ -142,12 +175,17 @@ function App() {
 
           <a className="availability" href="#contact">
             <span className="status-dot" />
-            AVAILABLE FOR WORK
+            LET'S TALK
           </a>
         </nav>
-      )}
+      
 
-      <section className="hero-section" id="home">
+      
+<section
+  className={`hero-section ${currentView === 'skills' ? 'hero-section--skills' : ''}`}
+  id="home"
+>
+
         {currentView === 'home' && (
           <motion.div
             className="hero-copy"
@@ -321,6 +359,117 @@ function App() {
 
         <div className="hero-index" aria-hidden="true">PORTFOLIO / 001</div>
       </section>
+
+      
+<section className="contact-section" id="contact">
+  <div className="contact-heading">
+    <p className="eyebrow">
+      <span className="accent">//</span> 03 / GET IN TOUCH
+    </p>
+
+    <h2>
+      LET'S BUILD
+      <br />
+      SOMETHING <span className="accent">SECURE.</span>
+    </h2>
+
+    <p className="contact-intro">
+      Have a project, an opportunity, or an idea worth exploring?
+      I'd love to hear from you.
+    </p>
+  </div>
+
+  <div className="contact-layout">
+    <div className="contact-details">
+      <p className="contact-label">DIRECT CHANNELS</p>
+
+      <a
+        className="contact-link"
+        href="mailto:geoffreykithuka76@gmail.com"
+      >
+        <span>Email</span>
+        <span>geoffreykithuka76@gmail.com ↗</span>
+      </a>
+
+      <a
+        className="contact-link"
+        href="https://github.com/Geo-programme001"
+        target="_blank"
+        rel="noreferrer"
+      >
+        <span>GitHub</span>
+        <span>Explore my work ↗</span>
+      </a>
+
+      <a
+        className="contact-link"
+        href="https://www.linkedin.com/in/geoffrey-wambua-723225394/"
+        target="_blank"
+        rel="noreferrer"
+      >
+        <span>LinkedIn</span>
+        <span>Let's connect ↗</span>
+      </a>
+
+      <div className="contact-status">
+        <span className="status-dot" />
+        OPEN TO OPPORTUNITIES & COLLABORATION
+      </div>
+    </div>
+
+    <form className="contact-form" onSubmit={sendContactMessage}>
+      <p className="contact-label">SEND A MESSAGE</p>
+
+      <label htmlFor="contact-name">YOUR NAME</label>
+      <input
+        id="contact-name"
+        name="name"
+        type="text"
+        placeholder="How should I address you?"
+        required
+      />
+
+      <label htmlFor="contact-email">YOUR EMAIL</label>
+      <input
+        id="contact-email"
+        name="email"
+        type="email"
+        placeholder="you@example.com"
+        required
+      />
+
+      <label htmlFor="contact-subject">SUBJECT</label>
+      <input
+        id="contact-subject"
+        name="subject"
+        type="text"
+        placeholder="Project, opportunity, collaboration..."
+        required
+      />
+
+      <label htmlFor="contact-message">MESSAGE</label>
+      <textarea
+        id="contact-message"
+        name="message"
+        rows={5}
+        placeholder="Tell me what you're thinking..."
+        required
+      />
+
+      <button className="button button-primary" type="submit" disabled={isSending}>
+        {isSending ? 'SENDING...' : 'SEND MESSAGE'}
+        {!isSending && <span aria-hidden="true">↗</span>}
+      </button>
+
+      {contactStatus && (
+        <p className="contact-form-note" role="status" aria-live="polite">
+          {contactStatus}
+        </p>
+      )}
+    </form>
+  </div>
+</section>
+
 
       <footer className="site-footer">
         <span>© {new Date().getFullYear()} 3llier
