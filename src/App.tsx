@@ -9,9 +9,50 @@ const terminalLines = [
   '> initializing cyber_lab...',
   '> loading security modules...',
   '> status: learning. building. securing.',
-  '> system ready_',
+  "> system ready. type 'help' for commands.",
 ]
 
+/*
+I will add it to test it.*/ 
+
+const projects = [
+  {
+    number: '01',
+    title: 'AI-Based Intrusion Detection',
+    category: 'MACHINE LEARNING / CYBERSECURITY',
+    description:
+      'A machine-learning project exploring how network traffic data can be classified to identify normal and potentially malicious connections using the NSL-KDD dataset.',
+    technologies: ['Python', 'Scikit-learn', 'Pandas', 'NSL-KDD'],
+    status: 'RESEARCH & DEVELOPMENT',
+    github: '',
+    demo: '',
+  },
+  {
+    number: '02',
+    title: 'AJEP Apparels',
+    category: 'FULL-STACK WEB DEVELOPMENT',
+    description:
+      'An e-commerce website built with Django, featuring product categories, product management, and support for apparel variants.',
+    technologies: ['Python', 'Django', 'HTML', 'CSS'],
+    status: 'IN DEVELOPMENT',
+    github: '',
+    demo: '',
+  },
+  {
+    number: '03',
+    title: 'Annastat Website Concept',
+    category: 'BUSINESS WEB DESIGN',
+    description:
+      'A website concept created specifically for Annastat to demonstrate how a tailored online presence could present its business and services.',
+    technologies: ['React', 'TypeScript', 'CSS'],
+    status: 'CONCEPT',
+    github: '',
+    demo: '',
+  },
+]
+
+/*
+I will add it to test it.*/ 
 
 function TypingLine({
   text,
@@ -60,6 +101,41 @@ function TypingLine({
         <span className="cursor">▋</span>
       )}
     </p>
+  )
+}
+
+//Added this code
+
+function TypingText() {
+  const text = 'EXPERIENCES.'
+  const [displayedText, setDisplayedText] = useState('')
+  const [deleting, setDeleting] = useState(false)
+
+  useEffect(() => {
+    let timeout: ReturnType<typeof setTimeout>
+
+    if (!deleting && displayedText.length < text.length) {
+      timeout = setTimeout(() => {
+        setDisplayedText(text.slice(0, displayedText.length + 1))
+      }, 130)
+    } else if (!deleting && displayedText.length === text.length) {
+      timeout = setTimeout(() => setDeleting(true), 1200)
+    } else if (deleting && displayedText.length > 0) {
+      timeout = setTimeout(() => {
+        setDisplayedText(displayedText.slice(0, -1))
+      }, 70)
+    } else {
+      timeout = setTimeout(() => setDeleting(false), 350)
+    }
+
+    return () => clearTimeout(timeout)
+  }, [displayedText, deleting])
+
+  return (
+    <span className="accent typing-text">
+      {displayedText}
+      <span className="typing-cursor" aria-hidden="true" />
+    </span>
   )
 }
 
@@ -202,7 +278,8 @@ function App() {
               <br />
               <span className="outlined-text">DIGITAL</span>
               <br />
-              <span className="accent">EXPERIENCES.</span>
+              {/*<span className="accent">EXPERIENCES.</span>*/}
+              <TypingText />
             </h1>
 
             <p className="hero-description">
@@ -491,7 +568,80 @@ function App() {
     </form>
   </div>
 </section>
+/*I will add it to test it.*/
 
+<section className="projects-section" id="projects">
+  <div className="projects-heading">
+    <p className="eyebrow">
+      <span className="accent">//</span> 02 / SELECTED WORK
+    </p>
+
+    <h2>
+      PROJECTS THAT
+      <br />
+      <span className="accent">PROVE THE WORK.</span>
+    </h2>
+
+    <p className="projects-intro">
+      A collection of projects through which I explore software
+      development, machine learning, and cybersecurity.
+    </p>
+  </div>
+
+  <div className="projects-grid">
+    {projects.map((project) => (
+      <article className="project-card" key={project.number}>
+        <div className="project-card-top">
+          <span className="project-number">{project.number}</span>
+          <span className="project-status">{project.status}</span>
+        </div>
+
+        <p className="project-category">{project.category}</p>
+
+        <h3>{project.title}</h3>
+
+        <p className="project-description">
+          {project.description}
+        </p>
+
+        <div className="project-tech">
+          {project.technologies.map((technology) => (
+            <span key={technology}>{technology}</span>
+          ))}
+        </div>
+
+        <div className="project-links">
+          {project.github && (
+            <a
+              href={project.github}
+              target="_blank"
+              rel="noreferrer"
+            >
+              VIEW CODE ↗
+            </a>
+          )}
+
+          {project.demo && (
+            <a
+              href={project.demo}
+              target="_blank"
+              rel="noreferrer"
+            >
+              LIVE DEMO ↗
+            </a>
+          )}
+
+          {!project.github && !project.demo && (
+            <span className="project-link-placeholder">
+              LINKS COMING SOON
+            </span>
+          )}
+        </div>
+      </article>
+    ))}
+  </div>
+</section>
+/*I will add it to test it.*/
 
 <section className="about-section" id="about">
   <div className="about-heading">
