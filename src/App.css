@@ -972,3 +972,48 @@ a {
     padding-left: 0;
   }
 }
+
+
+/* Contact page: heading and form side by side */
+.contact-section {
+  padding: 76px 0 90px;
+}
+
+.contact-layout {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) minmax(0, 0.9fr);
+  gap: clamp(32px, 5vw, 72px);
+  align-items: start;
+}
+
+.contact-left {
+  min-width: 0;
+}
+
+.contact-heading {
+  margin-bottom: 36px;
+}
+
+.contact-heading h2 {
+  font-size: clamp(2.8rem, 5vw, 5rem);
+  line-height: 0.98;
+}
+
+.contact-intro {
+  max-width: 460px;
+}
+
+.contact-form {
+  margin-top: 0;
+}
+
+@media (max-width: 760px) {
+  .contact-layout {
+    grid-template-columns: 1fr;
+    gap: 38px;
+  }
+
+  .contact-heading h2 {
+    font-size: clamp(2.7rem, 10vw, 4rem);
+  }
+}

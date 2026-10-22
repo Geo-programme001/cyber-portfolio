@@ -360,63 +360,66 @@ function App() {
         <div className="hero-index" aria-hidden="true">PORTFOLIO / 001</div>
       </section>
 
-      
 <section className="contact-section" id="contact">
-  <div className="contact-heading">
-    <p className="eyebrow">
-      <span className="accent">//</span> 03 / GET IN TOUCH
-    </p>
-
-    <h2>
-      LET'S BUILD
-      <br />
-      SOMETHING <span className="accent">SECURE.</span>
-    </h2>
-
-    <p className="contact-intro">
-      Have a project, an opportunity, or an idea worth exploring?
-      I'd love to hear from you.
-    </p>
-  </div>
-
   <div className="contact-layout">
-    <div className="contact-details">
-      <p className="contact-label">DIRECT CHANNELS</p>
+    {/* LEFT COLUMN */}
+    <div className="contact-left">
+      <div className="contact-heading">
+        <p className="eyebrow">
+          <span className="accent">//</span> 03 / GET IN TOUCH
+        </p>
 
-      <a
-        className="contact-link"
-        href="mailto:geoffreykithuka76@gmail.com"
-      >
-        <span>Email</span>
-        <span>geoffreykithuka76@gmail.com ↗</span>
-      </a>
+        <h2>
+          LET'S BUILD
+          <br />
+          SOMETHING <span className="accent">SECURE.</span>
+        </h2>
 
-      <a
-        className="contact-link"
-        href="https://github.com/Geo-programme001"
-        target="_blank"
-        rel="noreferrer"
-      >
-        <span>GitHub</span>
-        <span>Explore my work ↗</span>
-      </a>
+        <p className="contact-intro">
+          Have a project, an opportunity, or an idea worth exploring?
+          I'd love to hear from you.
+        </p>
+      </div>
 
-      <a
-        className="contact-link"
-        href="https://www.linkedin.com/in/geoffrey-wambua-723225394/"
-        target="_blank"
-        rel="noreferrer"
-      >
-        <span>LinkedIn</span>
-        <span>Let's connect ↗</span>
-      </a>
+      <div className="contact-details">
+        <p className="contact-label">DIRECT CHANNELS</p>
 
-      <div className="contact-status">
-        <span className="status-dot" />
-        OPEN TO OPPORTUNITIES & COLLABORATION
+        <a
+          className="contact-link"
+          href="mailto:geoffreykithuka76@gmail.com"
+        >
+          <span>Email</span>
+          <span>geoffreykithuka76@gmail.com ↗</span>
+        </a>
+
+        <a
+          className="contact-link"
+          href="https://github.com/Geo-programme001"
+          target="_blank"
+          rel="noreferrer"
+        >
+          <span>GitHub</span>
+          <span>Explore my work ↗</span>
+        </a>
+
+        <a
+          className="contact-link"
+          href="https://www.linkedin.com/in/geoffrey-wambua-723225394/"
+          target="_blank"
+          rel="noreferrer"
+        >
+          <span>LinkedIn</span>
+          <span>Let's connect ↗</span>
+        </a>
+
+        <div className="contact-status">
+          <span className="status-dot" />
+          OPEN TO OPPORTUNITIES & COLLABORATION
+        </div>
       </div>
     </div>
 
+    {/* RIGHT COLUMN */}
     <form className="contact-form" onSubmit={sendContactMessage}>
       <p className="contact-label">SEND A MESSAGE</p>
 
@@ -456,13 +459,21 @@ function App() {
         required
       />
 
-      <button className="button button-primary" type="submit" disabled={isSending}>
+      <button
+        className="button button-primary"
+        type="submit"
+        disabled={isSending}
+      >
         {isSending ? 'SENDING...' : 'SEND MESSAGE'}
         {!isSending && <span aria-hidden="true">↗</span>}
       </button>
 
       {contactStatus && (
-        <p className="contact-form-note" role="status" aria-live="polite">
+        <p
+          className="contact-form-note"
+          role="status"
+          aria-live="polite"
+        >
           {contactStatus}
         </p>
       )}
