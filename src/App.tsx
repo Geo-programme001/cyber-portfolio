@@ -411,6 +411,17 @@ function App() {
           <span>LinkedIn</span>
           <span>Let's connect ↗</span>
         </a>
+        
+<a
+  className="contact-link"
+  href="https://wa.me/+254758317686"
+  target="_blank"
+  rel="noreferrer"
+>
+  <span>WhatsApp</span>
+  <span>Let's chat ↗</span>
+</a>
+
 
         <div className="contact-status">
           <span className="status-dot" />
@@ -480,6 +491,73 @@ function App() {
     </form>
   </div>
 </section>
+
+
+<section className="about-section" id="about">
+  <div className="about-heading">
+    <p className="eyebrow">
+      <span className="accent">//</span> 01 / ABOUT ME
+    </p>
+    <h2>
+      THE PERSON
+      <br />
+      BEHIND THE <span className="accent">CODE.</span>
+    </h2>
+  </div>
+
+  <div className="about-layout">
+    <div className="about-photo-wrap">
+      <img
+        className="about-photo"
+        src="/images/geoffrey.jpg"
+        alt="Geoffrey, creator of 3LLIER"
+      />
+      <div className="about-photo-caption">
+        <span className="status-dot" />
+        BUILDING MY NEXT CHAPTER
+      </div>
+    </div>
+
+    <div className="about-content">
+      <p className="about-kicker">MATHEMATICS · COMPUTER SCIENCE · SECURITY</p>
+
+      <h3>
+        Curious by nature.
+        <br />
+        <span className="accent">Driven to understand.</span>
+      </h3>
+
+      <p>
+        I'm Geoffrey, a Mathematics and Computer Science student
+        interested in how software works, how systems communicate,
+        and how digital experiences can be made more secure.
+      </p>
+
+      <p>
+        I'm building practical experience through software projects,
+        Linux, networking, and hands-on cybersecurity labs, with the
+        goal of growing into a penetration tester.
+      </p>
+
+      <p>
+        3LLIER is where I document that journey: building useful
+        things, breaking down complex problems, and learning to
+        create more secure systems.
+      </p>
+
+      <div className="about-principles">
+        <span><span className="accent">01.</span> BUILD</span>
+        <span><span className="accent">02.</span> TEST</span>
+        <span><span className="accent">03.</span> SECURE</span>
+      </div>
+
+      <a className="button button-primary" href="#contact">
+        LET'S CONNECT <span aria-hidden="true">↗</span>
+      </a>
+    </div>
+  </div>
+</section>
+
 
 
       <footer className="site-footer">
