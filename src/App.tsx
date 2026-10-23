@@ -12,8 +12,8 @@ const terminalLines = [
   "> system ready. type 'help' for commands.",
 ]
 
-/*
-I will add it to test it.*/ 
+{/*
+I will add it to test it.*/ }
 
 const projects = [
   {
@@ -51,8 +51,8 @@ const projects = [
   },
 ]
 
-/*
-I will add it to test it.*/ 
+{/*
+I will add it to test it.*/ }
 
 function TypingLine({
   text,
@@ -104,7 +104,7 @@ function TypingLine({
   )
 }
 
-//Added this code
+
 
 function TypingText() {
   const text = 'EXPERIENCES.'
@@ -568,8 +568,8 @@ function App() {
     </form>
   </div>
 </section>
-/*I will add it to test it.*/
-
+{/*I will add it to test it.*/
+}
 <section className="projects-section" id="projects">
   <div className="projects-heading">
     <p className="eyebrow">
@@ -641,7 +641,7 @@ function App() {
     ))}
   </div>
 </section>
-/*I will add it to test it.*/
+{/*I will add it to test it.*/}
 
 <section className="about-section" id="about">
   <div className="about-heading">
